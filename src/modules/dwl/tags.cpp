@@ -13,6 +13,7 @@
 #define TAG_INACTIVE 0
 #define TAG_ACTIVE 1
 #define TAG_URGENT 2
+#define TAG_ACTIVE_OTHER 4
 
 namespace waybar::modules::dwl {
 
@@ -197,6 +198,12 @@ void Tags::handle_view_tags(uint32_t tag, uint32_t state, uint32_t clients, uint
     button.get_style_context()->add_class("urgent");
   } else {
     button.get_style_context()->remove_class("urgent");
+  }
+
+  if (state & TAG_ACTIVE_OTHER) {
+    button.get_style_context()->add_class("focused-other");
+  } else {
+    button.get_style_context()->remove_class("focused-other");
   }
 }
 
